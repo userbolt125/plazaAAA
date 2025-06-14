@@ -6,10 +6,9 @@ interface PlacesSidebarProps {
   onClose: () => void;
 }
 
-interface Region {
+interface Country {
   id: string;
   name: string;
-  image: string;
   cities: {
     name: string;
     places: {
@@ -21,43 +20,215 @@ interface Region {
   }[];
 }
 
+interface Region {
+  id: string;
+  name: string;
+  image: string;
+  countries: Country[];
+  trendingPlaces: {
+    name: string;
+    description: string;
+    image: string;
+    tags: string[];
+    country: string;
+    city: string;
+  }[];
+}
+
 const regions: Region[] = [
   {
     id: 'europe',
     name: 'Europe',
     image: 'https://images.pexels.com/photos/2570063/pexels-photo-2570063.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'Paris',
-        places: [
+        name: 'Eiffel Tower',
+        description: 'Iconic iron lattice tower on the Champ de Mars, symbol of Paris and France.',
+        image: 'https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg',
+        tags: ['Landmark', 'Architecture', 'Tourism'],
+        country: 'France',
+        city: 'Paris'
+      },
+      {
+        name: 'Colosseum',
+        description: 'Ancient amphitheater in the heart of Rome, an iconic symbol of the Roman Empire.',
+        image: 'https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg',
+        tags: ['Historical', 'Architecture', 'Tourism'],
+        country: 'Italy',
+        city: 'Rome'
+      },
+      {
+        name: 'Sagrada Familia',
+        description: 'Antoni Gaudí\'s masterpiece basilica in Barcelona, a UNESCO World Heritage Site.',
+        image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg',
+        tags: ['Architecture', 'Religious', 'Art'],
+        country: 'Spain',
+        city: 'Barcelona'
+      },
+      {
+        name: 'Big Ben',
+        description: 'Famous clock tower at the Palace of Westminster in London.',
+        image: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg',
+        tags: ['Landmark', 'Historical', 'Architecture'],
+        country: 'United Kingdom',
+        city: 'London'
+      }
+    ],
+    countries: [
+      {
+        id: 'france',
+        name: 'France',
+        cities: [
           {
-            name: 'Eiffel Tower',
-            description: 'Iconic iron lattice tower on the Champ de Mars, symbol of Paris and France.',
-            image: 'https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg',
-            tags: ['Landmark', 'Architecture', 'Tourism']
+            name: 'Paris',
+            places: [
+              {
+                name: 'Eiffel Tower',
+                description: 'Iconic iron lattice tower on the Champ de Mars, symbol of Paris and France.',
+                image: 'https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg',
+                tags: ['Landmark', 'Architecture', 'Tourism']
+              },
+              {
+                name: 'Louvre Museum',
+                description: 'World\'s largest art museum and home to many famous works including the Mona Lisa.',
+                image: 'https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg',
+                tags: ['Art', 'Museum', 'Culture']
+              }
+            ]
           },
           {
-            name: 'Louvre Museum',
-            description: 'World\'s largest art museum and home to many famous works including the Mona Lisa.',
-            image: 'https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg',
-            tags: ['Art', 'Museum', 'Culture']
+            name: 'Lyon',
+            places: [
+              {
+                name: 'Basilique Notre-Dame de Fourvière',
+                description: 'Beautiful basilica overlooking the city of Lyon.',
+                image: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg',
+                tags: ['Religious', 'Architecture', 'Views']
+              }
+            ]
+          },
+          {
+            name: 'Nice',
+            places: [
+              {
+                name: 'Promenade des Anglais',
+                description: 'Famous waterfront promenade along the Mediterranean coast.',
+                image: 'https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg',
+                tags: ['Beach', 'Promenade', 'Mediterranean']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'Rome',
-        places: [
+        id: 'italy',
+        name: 'Italy',
+        cities: [
           {
-            name: 'Colosseum',
-            description: 'Ancient amphitheater in the heart of Rome, an iconic symbol of the Roman Empire.',
-            image: 'https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg',
-            tags: ['Historical', 'Architecture', 'Tourism']
+            name: 'Rome',
+            places: [
+              {
+                name: 'Colosseum',
+                description: 'Ancient amphitheater in the heart of Rome, an iconic symbol of the Roman Empire.',
+                image: 'https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg',
+                tags: ['Historical', 'Architecture', 'Tourism']
+              },
+              {
+                name: 'Vatican Museums',
+                description: 'World-renowned museums featuring art collections including the Sistine Chapel.',
+                image: 'https://images.pexels.com/photos/2402926/pexels-photo-2402926.jpeg',
+                tags: ['Art', 'Culture', 'Religious']
+              }
+            ]
           },
           {
-            name: 'Vatican Museums',
-            description: 'World-renowned museums featuring art collections including the Sistine Chapel.',
-            image: 'https://images.pexels.com/photos/2402926/pexels-photo-2402926.jpeg',
-            tags: ['Art', 'Culture', 'Religious']
+            name: 'Florence',
+            places: [
+              {
+                name: 'Uffizi Gallery',
+                description: 'One of the most famous art museums in the world.',
+                image: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg',
+                tags: ['Art', 'Museum', 'Renaissance']
+              }
+            ]
+          },
+          {
+            name: 'Venice',
+            places: [
+              {
+                name: 'St. Mark\'s Square',
+                description: 'The principal public square of Venice.',
+                image: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg',
+                tags: ['Historical', 'Architecture', 'Square']
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'spain',
+        name: 'Spain',
+        cities: [
+          {
+            name: 'Barcelona',
+            places: [
+              {
+                name: 'Sagrada Familia',
+                description: 'Antoni Gaudí\'s masterpiece basilica, a UNESCO World Heritage Site.',
+                image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg',
+                tags: ['Architecture', 'Religious', 'Art']
+              }
+            ]
+          },
+          {
+            name: 'Madrid',
+            places: [
+              {
+                name: 'Prado Museum',
+                description: 'Spain\'s main national art museum.',
+                image: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg',
+                tags: ['Art', 'Museum', 'Culture']
+              }
+            ]
+          },
+          {
+            name: 'Seville',
+            places: [
+              {
+                name: 'Alcázar of Seville',
+                description: 'Royal palace originally developed by Moorish Muslim kings.',
+                image: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg',
+                tags: ['Palace', 'Historical', 'Architecture']
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'uk',
+        name: 'United Kingdom',
+        cities: [
+          {
+            name: 'London',
+            places: [
+              {
+                name: 'Big Ben',
+                description: 'Famous clock tower at the Palace of Westminster.',
+                image: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg',
+                tags: ['Landmark', 'Historical', 'Architecture']
+              }
+            ]
+          },
+          {
+            name: 'Edinburgh',
+            places: [
+              {
+                name: 'Edinburgh Castle',
+                description: 'Historic fortress dominating the skyline of Edinburgh.',
+                image: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg',
+                tags: ['Castle', 'Historical', 'Views']
+              }
+            ]
           }
         ]
       }
@@ -67,38 +238,79 @@ const regions: Region[] = [
     id: 'asia',
     name: 'Asia',
     image: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'Tokyo',
-        places: [
+        name: 'Senso-ji Temple',
+        description: 'Ancient Buddhist temple in Asakusa, Tokyo\'s oldest temple.',
+        image: 'https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg',
+        tags: ['Religious', 'Cultural', 'Historical'],
+        country: 'Japan',
+        city: 'Tokyo'
+      },
+      {
+        name: 'Burj Khalifa',
+        description: 'World\'s tallest building with observation decks offering panoramic views.',
+        image: 'https://images.pexels.com/photos/162031/dubai-tower-arab-khalifa-162031.jpeg',
+        tags: ['Architecture', 'Modern', 'Luxury'],
+        country: 'UAE',
+        city: 'Dubai'
+      }
+    ],
+    countries: [
+      {
+        id: 'japan',
+        name: 'Japan',
+        cities: [
           {
-            name: 'Senso-ji Temple',
-            description: 'Ancient Buddhist temple in Asakusa, Tokyo\'s oldest temple.',
-            image: 'https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg',
-            tags: ['Religious', 'Cultural', 'Historical']
+            name: 'Tokyo',
+            places: [
+              {
+                name: 'Senso-ji Temple',
+                description: 'Ancient Buddhist temple in Asakusa, Tokyo\'s oldest temple.',
+                image: 'https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg',
+                tags: ['Religious', 'Cultural', 'Historical']
+              },
+              {
+                name: 'Shibuya Crossing',
+                description: 'Famous pedestrian crossing known as the busiest in the world.',
+                image: 'https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg',
+                tags: ['Urban', 'Modern', 'Iconic']
+              }
+            ]
           },
           {
-            name: 'Shibuya Crossing',
-            description: 'Famous pedestrian crossing known as the busiest in the world.',
-            image: 'https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg',
-            tags: ['Urban', 'Modern', 'Iconic']
+            name: 'Kyoto',
+            places: [
+              {
+                name: 'Fushimi Inari Shrine',
+                description: 'Famous shrine with thousands of vermillion torii gates.',
+                image: 'https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg',
+                tags: ['Religious', 'Cultural', 'Nature']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'Dubai',
-        places: [
+        id: 'uae',
+        name: 'United Arab Emirates',
+        cities: [
           {
-            name: 'Burj Khalifa',
-            description: 'World\'s tallest building with observation decks offering panoramic views.',
-            image: 'https://images.pexels.com/photos/162031/dubai-tower-arab-khalifa-162031.jpeg',
-            tags: ['Architecture', 'Modern', 'Luxury']
-          },
-          {
-            name: 'Palm Jumeirah',
-            description: 'Artificial archipelago in the shape of a palm tree.',
-            image: 'https://images.pexels.com/photos/4388164/pexels-photo-4388164.jpeg',
-            tags: ['Man-made', 'Luxury', 'Beach']
+            name: 'Dubai',
+            places: [
+              {
+                name: 'Burj Khalifa',
+                description: 'World\'s tallest building with observation decks offering panoramic views.',
+                image: 'https://images.pexels.com/photos/162031/dubai-tower-arab-khalifa-162031.jpeg',
+                tags: ['Architecture', 'Modern', 'Luxury']
+              },
+              {
+                name: 'Palm Jumeirah',
+                description: 'Artificial archipelago in the shape of a palm tree.',
+                image: 'https://images.pexels.com/photos/4388164/pexels-photo-4388164.jpeg',
+                tags: ['Man-made', 'Luxury', 'Beach']
+              }
+            ]
           }
         ]
       }
@@ -108,38 +320,96 @@ const regions: Region[] = [
     id: 'africa',
     name: 'Africa',
     image: 'https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'Cape Town',
-        places: [
+        name: 'Table Mountain',
+        description: 'Flat-topped mountain overlooking Cape Town, accessible by hiking or cable car.',
+        image: 'https://images.pexels.com/photos/1004665/pexels-photo-1004665.jpeg',
+        tags: ['Nature', 'Hiking', 'Views'],
+        country: 'South Africa',
+        city: 'Cape Town'
+      },
+      {
+        name: 'Pyramids of Giza',
+        description: 'Ancient Egyptian pyramids and the Great Sphinx, symbols of ancient civilization.',
+        image: 'https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg',
+        tags: ['Ancient', 'Wonder', 'Historical'],
+        country: 'Egypt',
+        city: 'Cairo'
+      }
+    ],
+    countries: [
+      {
+        id: 'south-africa',
+        name: 'South Africa',
+        cities: [
           {
-            name: 'Table Mountain',
-            description: 'Flat-topped mountain overlooking Cape Town, accessible by hiking or cable car.',
-            image: 'https://images.pexels.com/photos/1004665/pexels-photo-1004665.jpeg',
-            tags: ['Nature', 'Hiking', 'Views']
-          },
-          {
-            name: 'Robben Island',
-            description: 'Historic prison island where Nelson Mandela was imprisoned.',
-            image: 'https://images.pexels.com/photos/1485894/pexels-photo-1485894.jpeg',
-            tags: ['Historical', 'Cultural', 'Museum']
+            name: 'Cape Town',
+            places: [
+              {
+                name: 'Table Mountain',
+                description: 'Flat-topped mountain overlooking Cape Town, accessible by hiking or cable car.',
+                image: 'https://images.pexels.com/photos/1004665/pexels-photo-1004665.jpeg',
+                tags: ['Nature', 'Hiking', 'Views']
+              },
+              {
+                name: 'Robben Island',
+                description: 'Historic prison island where Nelson Mandela was imprisoned.',
+                image: 'https://images.pexels.com/photos/1485894/pexels-photo-1485894.jpeg',
+                tags: ['Historical', 'Cultural', 'Museum']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'Cairo',
-        places: [
+        id: 'egypt',
+        name: 'Egypt',
+        cities: [
           {
-            name: 'Pyramids of Giza',
-            description: 'Ancient Egyptian pyramids and the Great Sphinx, symbols of ancient civilization.',
-            image: 'https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg',
-            tags: ['Ancient', 'Wonder', 'Historical']
+            name: 'Cairo',
+            places: [
+              {
+                name: 'Pyramids of Giza',
+                description: 'Ancient Egyptian pyramids and the Great Sphinx, symbols of ancient civilization.',
+                image: 'https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg',
+                tags: ['Ancient', 'Wonder', 'Historical']
+              },
+              {
+                name: 'Egyptian Museum',
+                description: 'Museum housing ancient Egyptian artifacts including Tutankhamun\'s treasures.',
+                image: 'https://images.pexels.com/photos/71281/pexels-photo-71281.jpeg',
+                tags: ['Museum', 'Historical', 'Cultural']
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'morocco',
+        name: 'Morocco',
+        cities: [
+          {
+            name: 'Chefchaouen',
+            places: [
+              {
+                name: 'Blue Medina',
+                description: 'Famous blue-painted streets and buildings of Chefchaouen.',
+                image: 'https://images.pexels.com/photos/4388167/pexels-photo-4388167.jpeg',
+                tags: ['Cultural', 'Architecture', 'Photography']
+              }
+            ]
           },
           {
-            name: 'Egyptian Museum',
-            description: 'Museum housing ancient Egyptian artifacts including Tutankhamun\'s treasures.',
-            image: 'https://images.pexels.com/photos/71281/pexels-photo-71281.jpeg',
-            tags: ['Museum', 'Historical', 'Cultural']
+            name: 'Marrakech',
+            places: [
+              {
+                name: 'Jemaa el-Fnaa',
+                description: 'Famous square and marketplace in Marrakech\'s medina quarter.',
+                image: 'https://images.pexels.com/photos/4388167/pexels-photo-4388167.jpeg',
+                tags: ['Cultural', 'Market', 'Traditional']
+              }
+            ]
           }
         ]
       }
@@ -149,38 +419,90 @@ const regions: Region[] = [
     id: 'north-america',
     name: 'North America',
     image: 'https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'New York',
-        places: [
+        name: 'Statue of Liberty',
+        description: 'Iconic symbol of freedom and democracy on Liberty Island.',
+        image: 'https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg',
+        tags: ['Landmark', 'Historical', 'Tourism'],
+        country: 'USA',
+        city: 'New York'
+      },
+      {
+        name: 'Golden Gate Bridge',
+        description: 'Iconic suspension bridge spanning the Golden Gate strait.',
+        image: 'https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg',
+        tags: ['Architecture', 'Landmark', 'Engineering'],
+        country: 'USA',
+        city: 'San Francisco'
+      }
+    ],
+    countries: [
+      {
+        id: 'usa',
+        name: 'United States',
+        cities: [
           {
-            name: 'Statue of Liberty',
-            description: 'Iconic symbol of freedom and democracy on Liberty Island.',
-            image: 'https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg',
-            tags: ['Landmark', 'Historical', 'Tourism']
+            name: 'New York',
+            places: [
+              {
+                name: 'Statue of Liberty',
+                description: 'Iconic symbol of freedom and democracy on Liberty Island.',
+                image: 'https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg',
+                tags: ['Landmark', 'Historical', 'Tourism']
+              },
+              {
+                name: 'Central Park',
+                description: 'Massive urban park in Manhattan with various attractions.',
+                image: 'https://images.pexels.com/photos/76969/central-park-new-york-panorama-76969.jpeg',
+                tags: ['Nature', 'Recreation', 'Urban']
+              }
+            ]
           },
           {
-            name: 'Central Park',
-            description: 'Massive urban park in Manhattan with various attractions.',
-            image: 'https://images.pexels.com/photos/76969/central-park-new-york-panorama-76969.jpeg',
-            tags: ['Nature', 'Recreation', 'Urban']
+            name: 'San Francisco',
+            places: [
+              {
+                name: 'Golden Gate Bridge',
+                description: 'Iconic suspension bridge spanning the Golden Gate strait.',
+                image: 'https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg',
+                tags: ['Architecture', 'Landmark', 'Engineering']
+              },
+              {
+                name: 'Alcatraz Island',
+                description: 'Former high-security prison on an island in San Francisco Bay.',
+                image: 'https://images.pexels.com/photos/1141853/pexels-photo-1141853.jpeg',
+                tags: ['Historical', 'Prison', 'Museum']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'San Francisco',
-        places: [
+        id: 'canada',
+        name: 'Canada',
+        cities: [
           {
-            name: 'Golden Gate Bridge',
-            description: 'Iconic suspension bridge spanning the Golden Gate strait.',
-            image: 'https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg',
-            tags: ['Architecture', 'Landmark', 'Engineering']
+            name: 'Toronto',
+            places: [
+              {
+                name: 'CN Tower',
+                description: 'Iconic telecommunications tower and tourist attraction.',
+                image: 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg',
+                tags: ['Architecture', 'Views', 'Modern']
+              }
+            ]
           },
           {
-            name: 'Alcatraz Island',
-            description: 'Former high-security prison on an island in San Francisco Bay.',
-            image: 'https://images.pexels.com/photos/1141853/pexels-photo-1141853.jpeg',
-            tags: ['Historical', 'Prison', 'Museum']
+            name: 'Vancouver',
+            places: [
+              {
+                name: 'Stanley Park',
+                description: 'Large urban park surrounded by water on three sides.',
+                image: 'https://images.pexels.com/photos/1004665/pexels-photo-1004665.jpeg',
+                tags: ['Nature', 'Park', 'Recreation']
+              }
+            ]
           }
         ]
       }
@@ -190,38 +512,68 @@ const regions: Region[] = [
     id: 'south-america',
     name: 'South America',
     image: 'https://images.pexels.com/photos/1768744/pexels-photo-1768744.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'Rio de Janeiro',
-        places: [
+        name: 'Christ the Redeemer',
+        description: 'Art Deco statue of Jesus Christ atop Corcovado mountain.',
+        image: 'https://images.pexels.com/photos/2868242/pexels-photo-2868242.jpeg',
+        tags: ['Landmark', 'Religious', 'Views'],
+        country: 'Brazil',
+        city: 'Rio de Janeiro'
+      },
+      {
+        name: 'Machu Picchu',
+        description: 'Ancient Incan city set high in the Andes Mountains.',
+        image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg',
+        tags: ['Ancient', 'Wonder', 'Archaeological'],
+        country: 'Peru',
+        city: 'Cusco'
+      }
+    ],
+    countries: [
+      {
+        id: 'brazil',
+        name: 'Brazil',
+        cities: [
           {
-            name: 'Christ the Redeemer',
-            description: 'Art Deco statue of Jesus Christ atop Corcovado mountain.',
-            image: 'https://images.pexels.com/photos/2868242/pexels-photo-2868242.jpeg',
-            tags: ['Landmark', 'Religious', 'Views']
-          },
-          {
-            name: 'Copacabana Beach',
-            description: 'Famous beach known for its crescent shape and lively atmosphere.',
-            image: 'https://images.pexels.com/photos/2868255/pexels-photo-2868255.jpeg',
-            tags: ['Beach', 'Recreation', 'Culture']
+            name: 'Rio de Janeiro',
+            places: [
+              {
+                name: 'Christ the Redeemer',
+                description: 'Art Deco statue of Jesus Christ atop Corcovado mountain.',
+                image: 'https://images.pexels.com/photos/2868242/pexels-photo-2868242.jpeg',
+                tags: ['Landmark', 'Religious', 'Views']
+              },
+              {
+                name: 'Copacabana Beach',
+                description: 'Famous beach known for its crescent shape and lively atmosphere.',
+                image: 'https://images.pexels.com/photos/2868255/pexels-photo-2868255.jpeg',
+                tags: ['Beach', 'Recreation', 'Culture']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'Cusco',
-        places: [
+        id: 'peru',
+        name: 'Peru',
+        cities: [
           {
-            name: 'Machu Picchu',
-            description: 'Ancient Incan city set high in the Andes Mountains.',
-            image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg',
-            tags: ['Ancient', 'Wonder', 'Archaeological']
-          },
-          {
-            name: 'Sacred Valley',
-            description: 'Valley with numerous archaeological remains and villages.',
-            image: 'https://images.pexels.com/photos/2356087/pexels-photo-2356087.jpeg',
-            tags: ['Historical', 'Nature', 'Cultural']
+            name: 'Cusco',
+            places: [
+              {
+                name: 'Machu Picchu',
+                description: 'Ancient Incan city set high in the Andes Mountains.',
+                image: 'https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg',
+                tags: ['Ancient', 'Wonder', 'Archaeological']
+              },
+              {
+                name: 'Sacred Valley',
+                description: 'Valley with numerous archaeological remains and villages.',
+                image: 'https://images.pexels.com/photos/2356087/pexels-photo-2356087.jpeg',
+                tags: ['Historical', 'Nature', 'Cultural']
+              }
+            ]
           }
         ]
       }
@@ -231,38 +583,68 @@ const regions: Region[] = [
     id: 'oceania',
     name: 'Oceania',
     image: 'https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg',
-    cities: [
+    trendingPlaces: [
       {
-        name: 'Sydney',
-        places: [
+        name: 'Sydney Opera House',
+        description: 'Iconic performing arts venue with distinctive shell-like design.',
+        image: 'https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg',
+        tags: ['Architecture', 'Arts', 'Landmark'],
+        country: 'Australia',
+        city: 'Sydney'
+      },
+      {
+        name: 'Sky Tower',
+        description: 'Observation and telecommunications tower in city center.',
+        image: 'https://images.pexels.com/photos/5169489/pexels-photo-5169489.jpeg',
+        tags: ['Modern', 'Views', 'Architecture'],
+        country: 'New Zealand',
+        city: 'Auckland'
+      }
+    ],
+    countries: [
+      {
+        id: 'australia',
+        name: 'Australia',
+        cities: [
           {
-            name: 'Sydney Opera House',
-            description: 'Iconic performing arts venue with distinctive shell-like design.',
-            image: 'https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg',
-            tags: ['Architecture', 'Arts', 'Landmark']
-          },
-          {
-            name: 'Bondi Beach',
-            description: 'Famous beach known for its golden sand and surfing.',
-            image: 'https://images.pexels.com/photos/1878354/pexels-photo-1878354.jpeg',
-            tags: ['Beach', 'Surfing', 'Recreation']
+            name: 'Sydney',
+            places: [
+              {
+                name: 'Sydney Opera House',
+                description: 'Iconic performing arts venue with distinctive shell-like design.',
+                image: 'https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg',
+                tags: ['Architecture', 'Arts', 'Landmark']
+              },
+              {
+                name: 'Bondi Beach',
+                description: 'Famous beach known for its golden sand and surfing.',
+                image: 'https://images.pexels.com/photos/1878354/pexels-photo-1878354.jpeg',
+                tags: ['Beach', 'Surfing', 'Recreation']
+              }
+            ]
           }
         ]
       },
       {
-        name: 'Auckland',
-        places: [
+        id: 'new-zealand',
+        name: 'New Zealand',
+        cities: [
           {
-            name: 'Sky Tower',
-            description: 'Observation and telecommunications tower in city center.',
-            image: 'https://images.pexels.com/photos/5169489/pexels-photo-5169489.jpeg',
-            tags: ['Modern', 'Views', 'Architecture']
-          },
-          {
-            name: 'Waiheke Island',
-            description: 'Island in the Hauraki Gulf known for wineries and beaches.',
-            image: 'https://images.pexels.com/photos/5169490/pexels-photo-5169490.jpeg',
-            tags: ['Nature', 'Wine', 'Recreation']
+            name: 'Auckland',
+            places: [
+              {
+                name: 'Sky Tower',
+                description: 'Observation and telecommunications tower in city center.',
+                image: 'https://images.pexels.com/photos/5169489/pexels-photo-5169489.jpeg',
+                tags: ['Modern', 'Views', 'Architecture']
+              },
+              {
+                name: 'Waiheke Island',
+                description: 'Island in the Hauraki Gulf known for wineries and beaches.',
+                image: 'https://images.pexels.com/photos/5169490/pexels-photo-5169490.jpeg',
+                tags: ['Nature', 'Wine', 'Recreation']
+              }
+            ]
           }
         ]
       }
@@ -272,8 +654,29 @@ const regions: Region[] = [
 
 const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  const selectedRegionData = regions.find(r => r.id === selectedRegion);
+  const selectedCountryData = selectedRegionData?.countries.find(c => c.id === selectedCountry);
+
+  const handleRegionClick = (regionId: string) => {
+    if (selectedRegion === regionId) {
+      setSelectedRegion(null);
+      setSelectedCountry(null);
+    } else {
+      setSelectedRegion(regionId);
+      setSelectedCountry(null);
+    }
+  };
+
+  const handleCountryClick = (countryId: string) => {
+    if (selectedCountry === countryId) {
+      setSelectedCountry(null);
+    } else {
+      setSelectedCountry(countryId);
+    }
+  };
 
   return (
     <div className={`fixed inset-y-0 right-0 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 flex ${
@@ -296,10 +699,7 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
           {regions.map((region) => (
             <button
               key={region.id}
-              onClick={() => {
-                setSelectedRegion(selectedRegion === region.id ? null : region.id);
-                setSelectedCity(null);
-              }}
+              onClick={() => handleRegionClick(region.id)}
               className={`w-full py-4 flex items-center justify-center hover:bg-slate-100 transition-colors ${
                 selectedRegion === region.id ? 'bg-slate-200' : ''
               }`}
@@ -319,32 +719,46 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Second Column - Cities */}
+      {/* Second Column - Countries or Region Name */}
       {selectedRegion && (
         <div className="w-64 border-r border-slate-200 bg-white flex flex-col">
           <div className="p-4 border-b border-slate-200">
-            <h3 className="font-medium text-slate-800">Cities in {regions.find(r => r.id === selectedRegion)?.name}</h3>
+            <h3 className="font-medium text-slate-800">
+              {selectedCountry ? `Cities in ${selectedCountryData?.name}` : selectedRegionData?.name}
+            </h3>
           </div>
           
           <div className="flex-1 overflow-y-auto">
-            {regions
-              .find(r => r.id === selectedRegion)?.cities
-              .map((city) => (
-                <button
+            {selectedCountry ? (
+              // Show cities when a country is selected
+              selectedCountryData?.cities.map((city) => (
+                <div
                   key={city.name}
-                  onClick={() => setSelectedCity(selectedCity === city.name ? null : city.name)}
+                  className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-0"
+                >
+                  <span className="text-slate-700 font-medium">{city.name}</span>
+                  <div className="text-xs text-slate-500 mt-1">
+                    {city.places.length} place{city.places.length !== 1 ? 's' : ''}
+                  </div>
+                </div>
+              ))
+            ) : (
+              // Show countries when only region is selected
+              selectedRegionData?.countries.map((country) => (
+                <button
+                  key={country.id}
+                  onClick={() => handleCountryClick(country.id)}
                   className={`w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors ${
-                    selectedCity === city.name ? 'bg-slate-100' : ''
+                    selectedCountry === country.id ? 'bg-slate-100' : ''
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-700">{city.name}</span>
-                    {selectedCity === city.name && (
-                      <ChevronRight size={16} className="text-slate-500" />
-                    )}
+                    <span className="text-slate-700">{country.name}</span>
+                    <ChevronRight size={16} className="text-slate-500" />
                   </div>
                 </button>
-              ))}
+              ))
+            )}
           </div>
         </div>
       )}
@@ -367,12 +781,14 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
         )}
         
         <div className="flex-1 overflow-y-auto p-4">
-          {selectedCity ? (
+          {selectedCountry && selectedCountryData ? (
+            // Show places from selected country's cities
             <div className="grid gap-4">
-              {regions
-                .find(r => r.id === selectedRegion)
-                ?.cities.find(c => c.name === selectedCity)
-                ?.places.filter(place => 
+              {selectedCountryData.cities
+                .flatMap(city => 
+                  city.places.map(place => ({ ...place, cityName: city.name }))
+                )
+                .filter(place => 
                   place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                   place.description.toLowerCase().includes(searchQuery.toLowerCase())
                 )
@@ -386,6 +802,7 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                         <h3 className="font-medium text-white text-lg">{place.name}</h3>
+                        <p className="text-white/90 text-sm">{place.cityName}</p>
                       </div>
                     </div>
                     <div className="p-4">
@@ -401,10 +818,44 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
                   </div>
                 ))}
             </div>
-          ) : selectedRegion ? (
-            <div className="text-center p-6">
-              <h3 className="text-lg font-medium text-slate-500">Select a city</h3>
-              <p className="text-slate-400 mt-1">Choose a city to explore its places</p>
+          ) : selectedRegion && selectedRegionData ? (
+            // Show trending places for the selected region
+            <div>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">
+                Trending Places in {selectedRegionData.name}
+              </h3>
+              <div className="grid gap-4">
+                {selectedRegionData.trendingPlaces
+                  .filter(place => 
+                    place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    place.description.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                  .map((place, index) => (
+                    <div key={index} className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={place.image} 
+                          alt={place.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                          <h3 className="font-medium text-white text-lg">{place.name}</h3>
+                          <p className="text-white/90 text-sm">{place.city}, {place.country}</p>
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <p className="text-sm text-slate-600 mb-3">{place.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {place.tags.map((tag, i) => (
+                            <span key={i} className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           ) : (
             <div className="text-center p-6">
