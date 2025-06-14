@@ -724,46 +724,30 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
         <div className="w-64 border-r border-slate-200 bg-white flex flex-col">
           <div className="p-4 border-b border-slate-200">
             <h3 className="font-medium text-slate-800">
-              {selectedCountry ? `Cities in ${selectedCountryData?.name}` : selectedRegionData?.name}
+              {selectedRegionData?.name}
             </h3>
           </div>
           
           <div className="flex-1 overflow-y-auto">
-            {selectedCountry ? (
-              // Show cities when a country is selected
-              selectedCountryData?.cities.map((city) => (
-                <div
-                  key={city.name}
-                  className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-0"
-                >
-                  <span className="text-slate-700 font-medium">{city.name}</span>
-                  <div className="text-xs text-slate-500 mt-1">
-                    {city.places.length} place{city.places.length !== 1 ? 's' : ''}
-                  </div>
+            {selectedRegionData?.countries.map((country) => (
+              <button
+                key={country.id}
+                onClick={() => handleCountryClick(country.id)}
+                className={`w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors ${
+                  selectedCountry === country.id ? 'bg-slate-100' : ''
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-700">{country.name}</span>
+                  <ChevronRight size={16} className="text-slate-500" />
                 </div>
-              ))
-            ) : (
-              // Show countries when only region is selected
-              selectedRegionData?.countries.map((country) => (
-                <button
-                  key={country.id}
-                  onClick={() => handleCountryClick(country.id)}
-                  className={`w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors ${
-                    selectedCountry === country.id ? 'bg-slate-100' : ''
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-700">{country.name}</span>
-                    <ChevronRight size={16} className="text-slate-500" />
-                  </div>
-                </button>
-              ))
-            )}
+              </button>
+            ))}
           </div>
         </div>
       )}
 
-      {/* Third Column - Places */}
+      {/* Third Column - Cities or Places */}
       <div className="flex-1 bg-slate-50 flex flex-col">
         {selectedRegion && (
           <div className="p-4 border-b border-slate-200">
@@ -771,7 +755,7 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
               <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search places..."
+                placeholder={selectedCountry ? "Search cities..." : "Search places..."}
                 className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -782,41 +766,42 @@ const PlacesSidebar: React.FC<PlacesSidebarProps> = ({ isOpen, onClose }) => {
         
         <div className="flex-1 overflow-y-auto p-4">
           {selectedCountry && selectedCountryData ? (
-            // Show places from selected country's cities
-            <div className="grid gap-4">
-              {selectedCountryData.cities
-                .flatMap(city => 
-                  city.places.map(place => ({ ...place, cityName: city.name }))
-                )
-                .filter(place => 
-                  place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                  place.description.toLowerCase().includes(searchQuery.toLowerCase())
-                )
-                .map((place, index) => (
-                  <div key={index} className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={place.image} 
-                        alt={place.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <h3 className="font-medium text-white text-lg">{place.name}</h3>
-                        <p className="text-white/90 text-sm">{place.cityName}</p>
+            // Show cities when a country is selected
+            <div>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">
+                Cities in {selectedCountryData.name}
+              </h3>
+              <div className="grid gap-4">
+                {selectedCountryData.cities
+                  .filter(city => 
+                    city.name.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                  .map((city, index) => (
+                    <div key={index} className="bg-white rounded-lg border border-slate-200 p-4 hover:shadow-md transition-shadow">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-medium text-slate-800 text-lg">{city.name}</h4>
+                          <p className="text-sm text-slate-600 mt-1">
+                            {city.places.length} place{city.places.length !== 1 ? 's' : ''} to visit
+                          </p>
+                        </div>
+                        <ChevronRight size={20} className="text-slate-400" />
                       </div>
-                    </div>
-                    <div className="p-4">
-                      <p className="text-sm text-slate-600 mb-3">{place.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {place.tags.map((tag, i) => (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {city.places.slice(0, 3).map((place, i) => (
                           <span key={i} className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">
-                            {tag}
+                            {place.name}
                           </span>
                         ))}
+                        {city.places.length > 3 && (
+                          <span className="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">
+                            +{city.places.length - 3} more
+                          </span>
+                        )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           ) : selectedRegion && selectedRegionData ? (
             // Show trending places for the selected region
